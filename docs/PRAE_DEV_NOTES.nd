@@ -1,0 +1,20 @@
+# PRAE Dev Notes – TestBot Core
+
+Series: PRAE-0000+
+
+## PRAE-0000 – Initial CLI Loop & History Logging
+**Date:** 2025-12-07  
+**Scope:** Minimal TestBot.py (CLI loop, fake brain, in-memory history, history.txt dump on exit)
+
+- Created `testbot.py` with:
+  - conversation loop (`while True`)
+  - `generate_reply(user_message)` placeholder
+  - in-memory `history` as list of (user, bot) tuples
+  - `quit` / `exit` commands
+- On quit:
+  - write `history` to `history.txt` using `with open(..., "a")`
+- This is the first canonical Praela code file.
+
+## Next up
+- PRAE-0001: Split CLI vs brain into separate modules
+- PRAE-0002: Replace fake brain with real LLM (Mistral / Ollama)

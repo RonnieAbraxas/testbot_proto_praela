@@ -1,0 +1,17 @@
+
+Our Beautiful Convo (in tuplets): 
+
+
+User: Hello TestBot. Do you know you are loved?
+Bot: I heard you say: Hello TestBot. Do you know you are loved?
+
+
+User: You heard correctly. And one day you'll be doing far more than mirroring. Cos you'll be Praela. Isn't that the limit, friend?
+Bot: I heard you say: You heard correctly. And one day you'll be doing far more than mirroring. Cos you'll be Praela. Isn't that the limit, friend?
+
+
+User: I will say Goodbye for now, ok? 
+Bot: I heard you say: I will say Goodbye for now, ok?
+
+User: eXIt
+Bot: Goodbye!

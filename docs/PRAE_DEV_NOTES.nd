@@ -18,3 +18,36 @@ Series: PRAE-0000+
 ## Next up
 - PRAE-0001: Split CLI vs brain into separate modules
 - PRAE-0002: Replace fake brain with real LLM (Mistral / Ollama)
+
+
+======================
+## PRAE-0001 – Modular Architecture & Clean Entry Point
+**Date:** 2025-12-08  
+**Scope:** Module split (CLI, Brain, App Package), proper entry point, improved history handling
+
+- Created `app/` package with:
+  - `cli.py` – user loop (`run_cli()`), exit handling, `write_history()` function
+  - `brain.py` – `ConversationTurn` and `ConversationHistory` type aliases, placeholder `generate_reply(...)`
+  - `__init__.py` – package metadata and re-export for convenience
+
+- Updated `testbot.py` to act as the clean application entry point (Pattern B architecture):
+  - imports and calls `run_cli()` inside `if __name__ == "__main__":`
+  - ensures CLI only launches when explicitly run, not on import
+
+- Implemented improved history behavior:
+  - writes conversation to a separate file (e.g. `history2.txt`)
+  - cleaned newline formatting
+  - uses `Path()` from `pathlib` for OS-safe file handling
+
+- Verified CLI loop runs correctly, records user/bot turns, and exits gracefully.
+
+**Notes / Insights**
+- Clarified Python import behavior and `__name__ == "__main__"` entry guard.
+- Type hints now understood as structural contracts rather than enforcement.
+- Brain and CLI modules now cleanly separated for future LLM integration.
+- TestBot now resembles a real application skeleton rather than a monolithic script.
+
+## Next up
+- PRAE-0002: Real-time timestamped logging, auto-naming conversation files  
+- PRAE-0003: Integrate first real LLM (Gemma 2 Instruct, Mistral, or candidate model) into `brain.py`  
+- PRAE-0004: Add contextual prompt-building & memory hooks for Proto-Praela

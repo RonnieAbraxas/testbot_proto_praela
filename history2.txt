@@ -1,0 +1,12 @@
+
+=== New Conversation ===
+
+User: Hello, TestBot. This is our second conversation. Care to mirror me back?
+Bot:  I heard you say: Hello, TestBot. This is our second conversation. Care to mirror me back?
+
+User: You heard correctly. I will now close the program to complete this test.
+Bot:  I heard you say: You heard correctly. I will now close the program to complete this test.
+
+User: QUIt
+Bot:  Goodbye!
+

@@ -1,0 +1,2 @@
+Need to print final exchange 
+"User: quit, Bot: Goodbye!" to history log

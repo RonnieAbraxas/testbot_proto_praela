@@ -1,0 +1,34 @@
+=== New Conversation ===
+phase: echobot
+started: 2025-12-09T18:28:27
+
+2025-12-09T18:29:06
+User: Hello, echobot. Care to echo me and log our resp brand new conversation?
+
+2025-12-09T18:29:06
+Bot:  I heard you say: Hello, echobot. Care to echo me and log our resp brand new conversation?
+
+2025-12-09T18:31:48
+User: You heard right, largely owing to a malfunctioning backspace there! :) But echobot, you're doing it! You're writing to our convo log as we go. And that log_file.flush function made sure everything appended as soon as printed!
+
+2025-12-09T18:31:48
+Bot:  I heard you say: You heard right, largely owing to a malfunctioning backspace there! :) But echobot, you're doing it! You're writing to our convo log as we go. And that log_file.flush function made sure everything appended as soon as printed!
+
+2025-12-09T18:33:00
+User: You've got darn good ears, echobot. I'change the phase from echobot to 1-echobot though. Still, our function wrote the echobot folder and didn't write to my new 1-echobot folder. What do you say to that?
+
+2025-12-09T18:33:00
+Bot:  I heard you say: You've got darn good ears, echobot. I'change the phase from echobot to 1-echobot though. Still, our function wrote the echobot folder and didn't write to my new 1-echobot folder. What do you say to that?
+
+2025-12-09T18:33:12
+User: Great. I'm going to say goodbye now, so goodbye.
+
+2025-12-09T18:33:12
+Bot:  I heard you say: Great. I'm going to say goodbye now, so goodbye.
+
+2025-12-09T18:33:26
+User: eXIt
+
+2025-12-09T18:33:26
+Bot:  Goodbye!
+

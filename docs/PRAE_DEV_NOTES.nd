@@ -51,3 +51,38 @@ Series: PRAE-0000+
 - PRAE-0002: Real-time timestamped logging, auto-naming conversation files  
 - PRAE-0003: Integrate first real LLM (Gemma 2 Instruct, Mistral, or candidate model) into `brain.py`  
 - PRAE-0004: Add contextual prompt-building & memory hooks for Proto-Praela
+
+
+
+======================
+## PRAE-0002 – Real-Time Timestamped Logging & Auto-Named Conversation Files
+**Date:** 2025-12-09  
+**Scope:** Full logging system overhaul: timestamps, per-phase folders, auto-named files
+
+### Changes Implemented
+- Added `logs/` root directory with subfolders per phase (e.g., `logs/echobot/`)
+- Implemented timestamp-based file naming via:
+  - `make_log_file_path(phase)`
+  - ISO-style datetime strings for ordering and consistency
+- Upgraded `run_cli()` to:
+  - create a fresh log file at conversation start
+  - write entries *immediately* with `flush()` to prevent data loss
+  - format each turn as:
+
+        2025-12-09T12:48:03
+        User: Hello TestBot!
+
+        2025-12-09T12:48:03
+        Bot:  I heard you say: Hello TestBot!
+
+- Added a global `timestamp()` helper for consistent formatting
+- All log writing now happens **in the open file context**, instead of huge end-of-convo dumps
+
+### Notes / Insights
+- `flush()` ensures no memory or progress is ever lost — essential for ASE-grade logging.
+- `Path` objects from `pathlib` make file generation safer across OSes.
+- Conversation storage is now scalable, audit-friendly, and ready for model auditions.
+
+## Next up
+- PRAE-0003: Integrate first LLM into `brain.py` (Gemma/Mistral/Albatross)
+- PRAE-0004: Add contextual prompt-building & creation-script audition system

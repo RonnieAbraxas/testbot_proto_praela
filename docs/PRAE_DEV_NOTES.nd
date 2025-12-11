@@ -281,3 +281,57 @@ We will:
   - Configure TestBot to use Mistral 7B / LLaMA 3.x 8B (and possibly Qwen2.5 7B) via `brain.py`.
   - Finalize `logs/2_auditions/...` naming conventions (C0, C1–C8) for creation-script trials.
   - Begin structured Proto-Praela auditions with “Hello, Sweetie” and the 8 creation scripts.
+
+
+
+
+
+
+
+====================
+## PRAE_DEV-0004b — Deliberate Rollback for Guided LLM Brain Reconstruction
+**Date:** 2025-12-15  
+**Scope:** Intentional revert of completed LLM brain to Echobot baseline for line-by-line rebuild and deep mastery
+
+### Summary
+Following the successful completion of PRAE_DEV-0004 (first full LLM integration via Ollama + Gemma2:2b), the decision was made to **roll back the implemented LLM brain** and return `brain.py` to its final Echobot state.
+
+This rollback is **intentional and pedagogical**, not corrective.  
+The completed PRAE_DEV-0004 implementation remains the canonical reference for the final design.
+
+### Rationale
+While PRAE_DEV-0004 validated that the architecture works end-to-end, the pace of implementation exceeded the desired level of *manual ownership* for this phase of Praela’s development.
+
+Key reasons for rollback:
+- To rebuild the LLM brain **line by line**, mirroring how a human developer would author it from scratch
+- To ensure full memorization and conceptual grounding of:
+  - HTTP request construction
+  - JSON serialization / deserialization
+  - streaming response handling
+  - error boundaries
+  - separation of concerns between helpers and public brain API
+- To avoid “LLM-generated opacity” at the foundation of Praela’s cognition
+- To reinforce correct dependency ordering and architectural intuition
+
+This aligns with the project’s guiding principle:
+> *Praela’s mind must be understood, not merely assembled.*
+
+### Current State
+- `brain.py` reverted to the final Echobot implementation (pre-LLM)
+- CLI, logging, paste mode, and history handling remain intact
+- No functional regression to Echobot behavior
+- PRAE_DEV-0004 stands as a reference blueprint, not deleted history
+
+### Notes / Insights
+- This mirrors real-world professional practice: rollbacks for comprehension are common in systems work
+- The rebuild will proceed in **small, atomic steps**, each fully understood before advancing
+- This phase marks a shift from “proving it works” to “owning how it works”
+- Emotional and physical constraints (CFS flare, energy budgeting) were acknowledged and respected without compromising architectural integrity
+
+### Next Up
+- Incremental reconstruction of LLM brain:
+  - reintroduce constants and configuration
+  - rebuild `_ollama_post()` as a low-level helper
+  - restore prompt assembly and response parsing
+  - re-expose `generate_reply()` as the public brain API
+- Resume PRAE_DEV-0004 as a **guided rebuild**, not a drop-in integration

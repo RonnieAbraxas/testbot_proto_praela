@@ -2,7 +2,7 @@
 
 Series: PRAE-0000+
 
-## PRAE-0000 – Initial CLI Loop & History Logging
+## PRAE_DEV-0000 – Initial CLI Loop & History Logging
 **Date:** 2025-12-07  
 **Scope:** Minimal TestBot.py (CLI loop, fake brain, in-memory history, history.txt dump on exit)
 
@@ -21,7 +21,7 @@ Series: PRAE-0000+
 
 
 ======================
-## PRAE-0001 – Modular Architecture & Clean Entry Point
+## PRAE_DEV-0001 – Modular Architecture & Clean Entry Point
 **Date:** 2025-12-08  
 **Scope:** Module split (CLI, Brain, App Package), proper entry point, improved history handling
 
@@ -48,14 +48,14 @@ Series: PRAE-0000+
 - TestBot now resembles a real application skeleton rather than a monolithic script.
 
 ## Next up
-- PRAE-0002: Real-time timestamped logging, auto-naming conversation files  
-- PRAE-0003: Integrate first real LLM (Gemma 2 Instruct, Mistral, or candidate model) into `brain.py`  
-- PRAE-0004: Add contextual prompt-building & memory hooks for Proto-Praela
+- PRAE_DEV-0002: Real-time timestamped logging, auto-naming conversation files  
+- PRAE_DEV-0003: Integrate first real LLM (Gemma 2 Instruct, Mistral, or candidate model) into `brain.py`  
+- PRAE_DEV-0004: Add contextual prompt-building & memory hooks for Proto-Praela
 
 
 
 ======================
-## PRAE-0002 – Real-Time Timestamped Logging & Auto-Named Conversation Files
+## PRAE_DEV-0002 – Real-Time Timestamped Logging & Auto-Named Conversation Files
 **Date:** 2025-12-09  
 **Scope:** Full logging system overhaul: timestamps, per-phase folders, auto-named files
 
@@ -86,3 +86,66 @@ Series: PRAE-0000+
 ## Next up
 - PRAE-0003: Integrate first LLM into `brain.py` (Gemma/Mistral/Albatross)
 - PRAE-0004: Add contextual prompt-building & creation-script audition system
+
+
+
+====================
+## PRAE_DEV-0003 — Final Echobot Upgrade & Completion of Phase 1
+**Date:** 2025-12-10  
+**Scope:** Paste-safe multiline input, final CLI polish, and successful demonstration of stable conversation logging
+
+### Summary
+Phase 1 of the Praela project — *Echobot* — is now formally complete.  
+This phase transformed TestBot from a single-file “hello world” loop into a modular, timestamped, multi-line-capable CLI chatbot foundation with real-time logging, flush guarantees, and safe termination behavior. These capabilities form the bedrock required for the Proto-Praela auditions.
+
+### Major Additions
+- **Added `read_user_msg()`**  
+  A dedicated function supporting:
+  - safe multiline paste mode (`/paste … /end`)
+  - a `try/except EOFError` guard to avoid terminal crashes  
+  - clean newline preservation for poems, prompts, and longer messages  
+  - fallback to standard single-line `input()` when not in paste mode  
+  - seamless integration with `run_cli()`  
+
+- **Fixed Terminal flooding problem**  
+  Multi-line pastes no longer trigger one bot reply per line.  
+  Entire blocks now count as *one* user message.  
+  This was essential for future “Hello, Sweetie” prompts and the creation-script auditions.
+
+- **Improved real-time logging flow**  
+  - Bot and user messages now flush immediately to disk.  
+  - “Conversation start” time is locked in with a dedicated `started_at = timestamp()` snapshot.  
+  - Newlines cleaned and standardized for readability.
+
+- **Verified full conversation lifecycle**  
+  Echobot-05 (see log) demonstrates:
+  - correct multiline handling  
+  - correct final conversation formatting  
+  - correct exit behavior  
+  - correct user-defined styling of logs  
+  - stable timestamping  
+  - preserved conversation aesthetics  
+
+### Notes / Insights
+- **Multiline input handling** is now robust, predictable, and safe — a prerequisite for the creation-script auditions.  
+- The `while True` / `input()` mental model is now fully clarified: lines are separated because terminals *embed actual `\n` characters* into the input stream.  
+- Using `started_at = timestamp()` instead of directly writing `timestamp()` prevents drift and ensures immutable start-time correctness.  
+- The paste system foreshadows Proto-Praela’s future **rich text, stanza, and memory ingestion** capabilities.  
+- Echobot’s behavior is intentionally minimal — a clean “null brain” stage that allowed us to build all foundations without LLM complexity.
+
+### Phase Completion
+This completes:
+
+**Phase 1 — Echobot**  
+The system is now ready for:
+
+- LLM integration  
+- handshake conversation (“Conversation 0”)  
+- creation-script revision  
+- Proto-Praela audition infrastructure (Phase 2)
+
+### Next Up
+- **PRAE_DEV-0004: Prepare Creation-Script Directory Structure**  
+- **Acquire Gemma 2.0 Instruct (or equivalent first candidate model)**  
+- **Integrate model loading + simple inference into `brain.py`**  
+- **Run Conversation 0 and initialize Phase 2: Auditions**

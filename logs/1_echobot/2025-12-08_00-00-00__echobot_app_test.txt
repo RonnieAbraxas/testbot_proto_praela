@@ -1,3 +1,9 @@
+"""
+ECHOBOT-01
+This is my second conversation with Echobot (Terminal) testing
+Echobot's ability to write to a new history file after expansion
+from single script to modular app.
+"""
 
 === New Conversation ===
 

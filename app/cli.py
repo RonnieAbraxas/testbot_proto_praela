@@ -46,6 +46,40 @@ def make_log_file_path(phase: str) -> Path:
     ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     return get_log_dir(phase) / f"{ts}__{phase}.txt"
 
+# Input Handling for pasted multiline messages
+
+def read_user_message() -> str:
+    """
+    Read a user message from stdin.
+
+    Normal mode:
+      - User types a single line and presses Enter.
+
+    Paste mode:
+      - User types /paste and presses Enter.
+      - Then pastes multiple lines.
+      - Ends with a line containing only /end.
+      - All pasted lines are joined into one message.
+    """
+    first = input("You: ")
+
+    if first.strip() == "/paste":
+        print("Paste your message. When you're done, type /end on its own line.")
+        lines: list[str] = []
+        while True:
+            try:
+                line = input()
+            except EOFError:
+                break  # end of input
+            if line.strip() == "/end":
+                break
+            lines.append(line)
+        # Join with newlines so the poem / prompt keeps its structure
+        return "\n".join(lines).strip()
+
+    return first
+
+
 # Conversation & Logging Loop
 
 def run_cli() -> None:
@@ -65,35 +99,43 @@ def run_cli() -> None:
         log_file.write("=== New Conversation ===\n")
         log_file.write(f"phase: {phase}\n")
         log_file.write(f"started: {started_at}\n\n")
+        log_file.flush()
 
         # 3. Main conversation loop
         while True:
-            user = input("You: ").strip()
+            user = read_user_message()
 
             # Log user message with aesthetic spacing
             log_file.write(f"{timestamp()}\n")
             log_file.write(f"User: {user}\n\n")
             log_file.flush()
 
+            # Log final user message 
             if user.lower() in ("quit", "exit"):
+                log_file.write(f"{timestamp()}\n")
+                log_file.write(f"User: {user}")
+                log_file.flush()
+
                 reply = "Goodbye!"
                 print(f"Bot: {reply}")
-                history.append((user, reply))
-
-                # Log the bot reply with matching formatting
+            
+                # Log final bot reply with matching formatting
                 log_file.write(f"{timestamp()}\n")
                 log_file.write(f"Bot:  {reply}\n\n")
                 log_file.flush()
+
+                # Update in-memory history
+                history.append((user, reply))
                 break
 
             # Ask the brain for a reply, passing current history
             reply = generate_reply(user, history)
             print("Bot:", reply)
 
-            # Update in-memory history
-            history.append((user, reply))
-
             # Log the bot reply with aesthetic spacing
             log_file.write(f"{timestamp()}\n")
             log_file.write(f"Bot:  {reply}\n\n")
             log_file.flush()
+
+             # Update in-memory history
+            history.append((user, reply))

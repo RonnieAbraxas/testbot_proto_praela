@@ -1,3 +1,8 @@
+"""
+ECHOBOT-00
+This is my first conversation with Echobot (Terminal) testing
+Echobot's ability to write to external history
+"""
 
 Our Beautiful Convo (in tuplets): 
 

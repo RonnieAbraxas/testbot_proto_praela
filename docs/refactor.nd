@@ -1,0 +1,7 @@
+[2025-12-10-11-17] 
+brain.py: extract parse function into helper for maintainability
+
+    •	Add error handling around _ollama_post so a crashed Ollama server doesn’t take down the whole app.
+	•	Maybe factor out prompt-building into its own helper once we start adding creation scripts and special system messages.
+	•	Eventually support temperature, top_p, etc. coming in as config so you can audition with different “vibes” without changing code.
+    
